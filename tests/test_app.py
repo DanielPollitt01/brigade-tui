@@ -321,15 +321,13 @@ def test_model_colours_are_one_per_model_deterministically() -> None:
     }
 
 
-async def test_renders_an_svg_screenshot_to_docs() -> None:
-    docs = REPO_ROOT / "docs"
-    docs.mkdir(exist_ok=True)
+async def test_renders_an_svg_screenshot(tmp_path) -> None:
     app = BrigadeTUI(projects=PROJECTS, sources=())
     async with app.run_test() as pilot:
         await pilot.pause()
-        saved = app.save_screenshot(filename="scaffold.svg", path=str(docs))
+        saved = app.save_screenshot(filename="scaffold.svg", path=str(tmp_path))
     svg_path = Path(saved)
-    assert svg_path == docs / "scaffold.svg"
+    assert svg_path == tmp_path / "scaffold.svg"
     assert svg_path.exists()
     assert svg_path.stat().st_size > 0
     assert "<svg" in svg_path.read_text(encoding="utf-8")
