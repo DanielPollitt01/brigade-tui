@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# verify-stable-tabs-live.sh — prove STW-47 in a real Herdr pane.
+# verify-stable-tabs-live.sh — prove ITEM-47 in a real Herdr pane.
 #
 # Runs the worktree Brigade in a real pane against a real pi root. It records
 # the tab bar and the active project, then makes an existing project the newest

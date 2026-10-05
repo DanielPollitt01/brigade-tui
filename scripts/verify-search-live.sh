@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# verify-search-live.sh — prove STW-51 R10 in a real Herdr pane.
+# verify-search-live.sh — prove ITEM-51 R10 in a real Herdr pane.
 #
 # Runs Brigade in a real pane against a temp pi root with two sessions whose
 # ids are full UUIDs. Then, keyboard only:

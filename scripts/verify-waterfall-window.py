@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-49: a human waterfall axis, a time window and a now marker.
+"""Prove a human waterfall axis, a time window and a now marker.
 
 Reads the real pi, Claude Code and opencode stores, then drives the real
 ``BrigadeTUI`` at 140x45. For every visible project pane it checks:
@@ -13,7 +13,7 @@ Reads the real pi, Claude Code and opencode stores, then drives the real
      glyph sits at the column the window places ``now`` on, on the axis row
      and on every lane row
 
-It writes ``docs/waterfall-window-stw49.svg`` (and a PNG when
+It writes ``docs/waterfall-window-item49.svg`` (and a PNG when
 ``rsvg-convert`` is present) from the real render, and prints a table.
 
 Read-only. It never writes to a source store.
@@ -45,8 +45,8 @@ from brigade_tui.timeline import (
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS = REPO_ROOT / "docs"
-SVG_PATH = DOCS / "waterfall-window-stw49.svg"
-PNG_PATH = DOCS / "waterfall-window-stw49.png"
+SVG_PATH = DOCS / "waterfall-window-item49.svg"
+PNG_PATH = DOCS / "waterfall-window-item49.png"
 
 
 def axis_width_for(timeline: TimelineView) -> tuple[int, int]:
@@ -188,7 +188,7 @@ def main() -> int:
             " clipped to the window"
         )
 
-    print("STW-49 waterfall window: real stores, 140x45")
+    print("ITEM-49 waterfall window: real stores, 140x45")
     print(f"panes: {len(report)}  blocks checked: {total_blocks}")
     print(
         f"longest visible history: {longest['full_span']:.1f}s"

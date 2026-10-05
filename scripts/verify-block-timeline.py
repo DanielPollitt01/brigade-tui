@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-38: the tab body is a real-time block timeline, not a cascade.
+"""Prove the tab body is a real-time block timeline, not a cascade.
 
 Reads the real pi, Claude Code and opencode stores. It finds a real project
 where a role ran more than once, then drives the real ``BrigadeTUI``
@@ -19,7 +19,7 @@ over those real sessions, at 140x45, and checks:
      overlapped
   7. blocks are coloured by model, with the model legend; no state word
 
-It writes ``docs/block-timeline-stw38.svg`` (and a PNG when ``rsvg-convert`` is
+It writes ``docs/block-timeline-item38.svg`` (and a PNG when ``rsvg-convert`` is
 present) from the real render.
 
 Read-only. It never writes to a source store.
@@ -50,8 +50,8 @@ from brigade_tui.timeline import (
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS = REPO_ROOT / "docs"
-SVG_PATH = DOCS / "block-timeline-stw38.svg"
-PNG_PATH = DOCS / "block-timeline-stw38.png"
+SVG_PATH = DOCS / "block-timeline-item38.svg"
+PNG_PATH = DOCS / "block-timeline-item38.png"
 
 ROLES = ("planner", "builder", "reviewer")
 STATE_WORDS = ("running", "queued", "success", "failed", "idle", "done")

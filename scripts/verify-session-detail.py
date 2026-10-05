@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-43: one session detail pane with a read-only transcript tail.
+"""Prove one session detail pane with a read-only transcript tail.
 
 Read-only. It never writes to a source store. It builds a temp pi root, reads
 it with the real ``PiSessions`` source, then:
@@ -218,7 +218,7 @@ def main() -> int:
                 failures.append(f"{name} opened {session_id}, expected {TARGET_ID}")
 
         document = {
-            "item": "STW-43",
+            "item": "ITEM-43",
             "target_session": TARGET_ID,
             "source_file": target.transcript_path,
             "tail_total": tail.total,
@@ -232,7 +232,7 @@ def main() -> int:
             "failures": failures,
         }
         EVIDENCE.mkdir(exist_ok=True)
-        out = EVIDENCE / "STW-43-verify-session-detail.json"
+        out = EVIDENCE / "ITEM-43-verify-session-detail.json"
         out.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
 
         print(f"source file: {target.transcript_path}")

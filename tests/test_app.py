@@ -372,22 +372,22 @@ async def test_seed_session_owns_no_tab_but_search_finds_it_by_id() -> None:
     seed = Session(
         harness=Harness.PI,
         session_id="01a10446-a3f2-73df-8891-452b15f67f93",
-        project=ProjectRef(key="/tmp/stw32/wt/STW-1", label="STW-1"),
-        directory="/tmp/stw32/wt/STW-1",
+        project=ProjectRef(key="/tmp/item32/wt/ITEM-1", label="ITEM-1"),
+        directory="/tmp/item32/wt/ITEM-1",
         last_activity=now,
     )
     real = Session(
         harness=Harness.PI,
         session_id="real-project-session",
-        project=ProjectRef(key="/home/user/work/brigade-tui", label="brigade"),
-        directory="/home/user/work/brigade-tui",
+        project=ProjectRef(key="/home/user/Workspace/work/brigade", label="brigade"),
+        directory="/home/user/Workspace/work/brigade",
         last_activity=now - timedelta(minutes=5),
     )
     app = BrigadeTUI(sources=(MultiSessionSource([seed, real]),))
     async with app.run_test(size=(120, 30)) as pilot:
         await pilot.pause()
         # The seed project owns no tab; the real /home project still shows.
-        assert app._pane_keys == ["/home/user/work/brigade-tui"]
+        assert app._pane_keys == ["/home/user/Workspace/work/brigade"]
         # The hidden session is still polled, so search can reach it.
         assert any(s.session_id == seed.session_id for s in app._sessions)
 

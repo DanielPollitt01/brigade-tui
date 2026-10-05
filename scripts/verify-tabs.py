@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-24: the live view over the real stores.
+"""Prove the live view over the real stores.
 
 Reads the real pi, Claude Code and opencode stores once, then drives the real
 ``BrigadeTUI`` and checks the rendered tab bar and tables:

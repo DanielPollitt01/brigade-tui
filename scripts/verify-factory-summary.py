@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-44: the factory summary line and the per-project progress signal.
+"""Prove the factory summary line and the per-project progress signal.
 
 Two proofs, both driven through the real ``BrigadeTUI``:
 
@@ -120,7 +120,7 @@ async def blocked_tab_probe(real_source, now: datetime) -> dict:
     newest = max(sessions, key=lambda item: item.last_activity)
     blocked = replace(
         newest,
-        session_id="stw-44-blocked-probe",
+        session_id="item-44-blocked-probe",
         title="blocked probe",
         reported_state="blocked",
         last_activity=now,
@@ -230,7 +230,7 @@ def main() -> int:
         "failures": failures,
     }
     EVIDENCE.mkdir(exist_ok=True)
-    out = EVIDENCE / "STW-44-factory-summary.json"
+    out = EVIDENCE / "ITEM-44-factory-summary.json"
     out.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(json.dumps(report, indent=2))
 

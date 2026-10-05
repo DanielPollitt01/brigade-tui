@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-34: seed and scratch sessions stay out of the live tab view.
+"""Prove seed and scratch sessions stay out of the live tab view.
 
 Reads the real pi, Claude Code and opencode stores once, then drives the real
 ``BrigadeTUI``. It checks:
@@ -10,7 +10,7 @@ Reads the real pi, Claude Code and opencode stores once, then drives the real
   3. the hidden seed session is still polled, and search finds it by id
   4. the flat table for the real project still shows its rows
 
-The marker is the one the Steward seed sets: the session cwd is a temp dir, or
+The marker is the one a seed run sets: the session cwd is a temp dir, or
 the session id carries a ``seed-`` or ``scratch-`` prefix. Brigade hides by
 that marker, never by guessing from a title.
 

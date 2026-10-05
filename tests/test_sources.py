@@ -148,7 +148,7 @@ def test_default_sources_read_every_temp_root(tmp_path, monkeypatch) -> None:
 
 
 def test_source_health_reports_path_mode_and_count(tmp_path, monkeypatch) -> None:
-    """STW-46: every enabled source shows its path, open mode and count."""
+    """every enabled source shows its path, open mode and count."""
     root = seed_fixture_root(tmp_path)
     point_env_at_fixtures(monkeypatch, root)
     _sessions, health = SessionStore(default_sources()).poll()
@@ -167,7 +167,7 @@ def test_source_health_reports_path_mode_and_count(tmp_path, monkeypatch) -> Non
 
 
 def test_missing_store_shows_unavailable_not_zero(tmp_path, monkeypatch) -> None:
-    """STW-46: a missing store is unavailable, never a silent zero count."""
+    """a missing store is unavailable, never a silent zero count."""
     point_env_at_fixtures(monkeypatch, seed_fixture_root(tmp_path))
     monkeypatch.setenv("OPENCODE_DB", str(tmp_path / "missing" / "opencode.db"))
     _sessions, health = SessionStore(default_sources()).poll()
@@ -178,7 +178,7 @@ def test_missing_store_shows_unavailable_not_zero(tmp_path, monkeypatch) -> None
 
 
 def test_health_strip_names_every_source_with_a_count(tmp_path, monkeypatch) -> None:
-    """STW-46: the rendered strip names all three sources and their counts."""
+    """the rendered strip names all three sources and their counts."""
     point_env_at_fixtures(monkeypatch, seed_fixture_root(tmp_path))
     _sessions, health = SessionStore(default_sources()).poll()
     rendered = render_health_strip(health).plain
@@ -198,7 +198,7 @@ def test_health_strip_marks_a_missing_store(tmp_path, monkeypatch) -> None:
 
 
 async def test_app_shows_the_source_health_strip(tmp_path, monkeypatch) -> None:
-    """STW-46: the real app renders the strip from the configured sources."""
+    """the real app renders the strip from the configured sources."""
     root = seed_fixture_root(tmp_path)
     point_env_at_fixtures(monkeypatch, root)
     app = BrigadeTUI()
@@ -275,7 +275,7 @@ def make_worktree(tmp_path: Path) -> tuple[Path, Path]:
     (repo / "readme.txt").write_text("hello\n", encoding="utf-8")
     run("git", "-C", str(repo), "add", "readme.txt")
     run("git", "-C", str(repo), "commit", "-qm", "init")
-    worktree = tmp_path / "worktrees" / "STW-42"
+    worktree = tmp_path / "worktrees" / "ITEM-42"
     run("git", "-C", str(repo), "worktree", "add", "-q", str(worktree))
     return repo, worktree
 
@@ -290,7 +290,7 @@ def test_worktree_directory_folds_into_the_owning_project(tmp_path) -> None:
     (worktree / "src").mkdir()
     assert project_from_directory(str(worktree / "src")).key == str(repo)
     # The worktree path never owns a project of its own.
-    assert "/worktrees/STW-42" not in ref.key
+    assert "/worktrees/ITEM-42" not in ref.key
 
 
 def test_pi_worktree_session_reads_under_the_owning_project(

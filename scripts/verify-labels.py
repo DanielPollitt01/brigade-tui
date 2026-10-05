@@ -21,7 +21,7 @@ and checks:
   5. the count of labels the old bare-short-id rule would have rendered and
      the count the new rule renders, for the record
 
-Writes ``evidence/STW-52-verify-labels.json`` from the real run.
+Writes ``evidence/ITEM-52-verify-labels.json`` from the real run.
 
 Read-only. It never writes to a source store.
 
@@ -48,7 +48,7 @@ from brigade_tui.timeline import TimelineView
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = REPO_ROOT / "evidence"
-JSON_PATH = EVIDENCE / "STW-52-verify-labels.json"
+JSON_PATH = EVIDENCE / "ITEM-52-verify-labels.json"
 
 ROLES = ("planner", "builder", "reviewer")
 

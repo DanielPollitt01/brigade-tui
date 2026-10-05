@@ -1,14 +1,14 @@
 # brigade-tui
 
-A terminal UI version of IndyDevDan's
+A read-only terminal view of coding-agent sessions across pi, Claude Code and
+opencode. One grid of session cards, a wall-clock swimlane waterfall per
+project, search and a session detail pane.
+
+Inspired by IndyDevDan's
 [super-simple-software-factory](https://github.com/disler/super-simple-software-factory).
 
-Personal build project. Status: a working read-only view. The build brief is
-`IDEAL_STATE.md`; the task list is `TASKS.org`.
-
 Brigade reads the session stores that coding agents already write and shows
-them. It never writes and it never launches an agent. v1 reads pi, Claude Code
-and opencode stores.
+them. It never writes and it never launches an agent.
 
 ## Run
 
@@ -170,20 +170,20 @@ for the selected row. Every row carries the raw session id next to the readable
 label, so a pasted id can be checked against the match. `scripts/verify-search-live.sh`
 drives this in a real Herdr pane with no mouse.
 
-Seed and scratch runs leave sessions whose cwd is a throwaway temp dir, such as
-`/tmp/stw32/wt/STW-1`. Brigade hides those by that marker: they own no project
-tab, so the live view stays free of test debris. A real project under `/home`
-or the repo tree still shows. The flat table and the `/` search still reach a
-hidden session by id, so nothing is lost. A session id or project key that
-starts with `seed-` or `scratch-` is hidden too, so the Steward seed can mark
+Seed and scratch runs leave sessions whose cwd is a throwaway temp dir, such
+as `/tmp/run4321/scratch-1`. Brigade hides those by that marker: they own no
+project tab, so the live view stays free of test debris. A real project under
+`/home` or a repo tree still shows. The flat table and the `/` search still
+reach a hidden session by id, so nothing is lost. A session id or project key
+that starts with `seed-` or `scratch-` is hidden too, so a harness can mark
 one outside a temp dir.
 
-A Steward worktree is not its own project. A session whose cwd is a git
+A git worktree is not its own project. A session whose cwd is a git
 worktree (a `.git` file pointing at `.../.git/worktrees/<name>`) folds into
 the owning checkout, so the main repo and all its worktrees share one tab.
 The grid groups its cards under a project heading: `project-name (count)`.
-An unattributed worktree path, one that does not resolve to an owner, is
-debris and owns no tab or grid heading.
+A worktree path that does not resolve to an owner is debris and owns no tab
+or grid heading.
 
 ## Source health strip
 
@@ -202,11 +202,9 @@ uses the three reserved state colours; those belong to the grid alone.
 `scripts/verify-source-health.py` proves the strip against the real stores,
 including the missing-store case.
 
-## What lives here
+## Layout
 
-- `IDEAL_STATE.md` — the single description of what done looks like. The build
-  brief and the test harness. Do not split this into plan files or PRDs.
-- `TASKS.org` — open work, org-mode headings.
-- `AGENTS.md` — rules for any agent working in this repo.
-- `steward.md` — the tracking contract for the Steward's live agent sessions.
-- `sessions.jsonl` — the live session log the Steward writes (git-ignored).
+- `brigade_tui/` — the program: sources, store, grid, waterfall and detail pane.
+- `tests/` — the suite, run from the committed fixtures with no agent install.
+- `scripts/` — dev verification harnesses.
+- `LICENSE` — MIT.

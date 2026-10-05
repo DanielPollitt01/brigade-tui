@@ -504,8 +504,8 @@ class BrigadeTUI(App):
             self.query_one("#view-caps", Static).update(
                 render_view_caps(build_view_caps(pairs, self._tab_order))
             )
-            # The grid shows the same projects as the tab view: Steward
-            # worktree debris and scratch runs own no heading.
+            # The grid shows the same projects as the tab view: unattributed
+            # worktrees and scratch runs own no heading.
             grid = self.query_one("#grid", SessionGrid)
             grid.click_action = self.detail_action
             grid.update_sessions(

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-54: config file, CLI flags, and the dead source path removal.
+"""Prove config file, CLI flags, and the dead source path removal.
 
 It proves three things, each against a real temp store and the real app:
 
@@ -34,7 +34,7 @@ from brigade_tui.sources import sources_from_roots
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = REPO_ROOT / "evidence"
-EVIDENCE_FILE = EVIDENCE / "STW-54-config.txt"
+EVIDENCE_FILE = EVIDENCE / "ITEM-54-config.txt"
 FIXTURES = REPO_ROOT / "tests" / "fixtures"
 
 
@@ -100,7 +100,7 @@ def find_dead_path() -> list[str]:
 
 def run() -> int:
     failures: list[str] = []
-    lines: list[str] = ["== STW-54 config and CLI proof ==", ""]
+    lines: list[str] = ["== ITEM-54 config and CLI proof ==", ""]
 
     with tempfile.TemporaryDirectory() as raw:
         sandbox = Path(raw)

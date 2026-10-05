@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Prove STW-42: Steward worktrees fold into the owning project.
+"""Prove git worktrees fold into the owning project.
 
 Runs against the real session stores on this machine (the ones Brigade reads
 by default). It proves three things:
 
-  1. no ``.../worktrees/STW-x`` path owns a tab
+  1. no ``.../worktrees/<name>`` path owns a tab
   2. the owning project shows the worktree sessions
   3. the grid renders a project heading
 
@@ -31,13 +31,13 @@ from brigade_tui.store import MAX_TABS, SessionStore, unique_labels
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = REPO_ROOT / "evidence"
-EVIDENCE_FILE = EVIDENCE / "STW-42-worktree-fold.txt"
+EVIDENCE_FILE = EVIDENCE / "ITEM-42-worktree-fold.txt"
 
-#: The Steward worktree layout: ``.../steward/worktrees/STW-<n>``.
-WORKTREE_RE = re.compile(r"/worktrees/STW-\d+")
+#: The git worktree layout: ``.../worktrees/<name>``.
+WORKTREE_RE = re.compile(r"/worktrees/[^/]+")
 
 #: The project this worktree belongs to. Its sessions fold here.
-OWNER_KEY = "/home/user/work/brigade-tui"
+OWNER_KEY = "/home/user/Workspace/work/software-factory-tui"
 
 
 def is_worktree_session(session) -> bool:
@@ -128,7 +128,7 @@ def main() -> int:
         )
 
     lines: list[str] = []
-    lines.append("== STW-42 worktree fold proof ==")
+    lines.append("== ITEM-42 worktree fold proof ==")
     lines.append(f"sessions: {data['sessions']}")
     lines.append(f"projects: {data['projects']}")
     lines.append("")

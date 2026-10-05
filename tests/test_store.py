@@ -28,22 +28,22 @@ def test_is_scratch_marks_a_temp_cwd_or_a_seed_prefix() -> None:
     temp = Session(
         harness=Harness.PI,
         session_id="01a10446-a3f2-73df-8891-452b15f67f93",
-        project=ProjectRef(key="/tmp/stw32/wt/STW-1", label="STW-1"),
-        directory="/tmp/stw32/wt/STW-1",
+        project=ProjectRef(key="/tmp/item32/wt/ITEM-1", label="ITEM-1"),
+        directory="/tmp/item32/wt/ITEM-1",
         last_activity=now,
     )
     root = Session(
         harness=Harness.PI,
         session_id="seed-defect-one-01",
-        project=ProjectRef(key="/srv/worktrees/STW-1", label="STW-1"),
-        directory="/srv/worktrees/STW-1",
+        project=ProjectRef(key="/srv/worktrees/ITEM-1", label="ITEM-1"),
+        directory="/srv/worktrees/ITEM-1",
         last_activity=now,
     )
     real = Session(
         harness=Harness.PI,
         session_id="real-session-id",
-        project=ProjectRef(key="/home/user/work/brigade-tui", label="brigade"),
-        directory="/home/user/work/brigade-tui",
+        project=ProjectRef(key="/home/user/Workspace/work/brigade", label="brigade"),
+        directory="/home/user/Workspace/work/brigade",
         last_activity=now,
     )
     assert is_scratch(temp) is True
@@ -55,16 +55,16 @@ def test_scratch_sessions_stay_out_of_the_tab_view() -> None:
     sessions = [
         # A scratch run is newer than the real project. It must not own a tab
         # and must not push the real project out.
-        session("/tmp/stw32/wt/STW-1", "STW-1", 20),
-        session("/home/user/work/brigade-tui", "brigade", 5),
+        session("/tmp/item32/wt/ITEM-1", "ITEM-1", 20),
+        session("/home/user/Workspace/work/brigade", "brigade", 5),
     ]
     pairs = SessionStore([]).by_project(sessions)
-    assert [project.key for project, _ in pairs] == ["/home/user/work/brigade-tui"]
+    assert [project.key for project, _ in pairs] == ["/home/user/Workspace/work/brigade"]
 
     all_pairs = SessionStore([]).by_project(sessions, include_scratch=True)
     assert [project.key for project, _ in all_pairs] == [
-        "/tmp/stw32/wt/STW-1",
-        "/home/user/work/brigade-tui",
+        "/tmp/item32/wt/ITEM-1",
+        "/home/user/Workspace/work/brigade",
     ]
 
 
@@ -74,20 +74,20 @@ def test_unattributed_worktree_path_is_hidden_but_a_folded_one_is_not() -> None:
         harness=Harness.PI,
         session_id="folded-worktree",
         project=ProjectRef(
-            key="/home/user/work/brigade-tui",
+            key="/home/user/Workspace/work/software-factory-tui",
             label="software-factory-tui",
         ),
-        directory="/home/user/work/worktrees/STW-42",
+        directory="/home/user/.local/share/workspace/orchestrator/worktrees/ITEM-42",
         last_activity=now,
     )
     debris = Session(
         harness=Harness.PI,
         session_id="orphan-worktree",
         project=ProjectRef(
-            key="/home/user/work/worktrees/STW-1",
-            label="STW-1",
+            key="/home/user/.local/share/workspace/orchestrator/worktrees/ITEM-1",
+            label="ITEM-1",
         ),
-        directory="/home/user/work/worktrees/STW-1",
+        directory="/home/user/.local/share/workspace/orchestrator/worktrees/ITEM-1",
         last_activity=now,
     )
     assert is_scratch(folded) is False
@@ -110,13 +110,13 @@ def test_by_project_ranks_projects_by_newest_session() -> None:
 
 def test_unique_labels_disambiguate_a_shared_basename() -> None:
     pairs = [
-        (ProjectRef("/srv/worktrees/STW-1", "STW-1"), []),
-        (ProjectRef("/var/tmp/st-hb/worktrees/STW-1", "STW-1"), []),
+        (ProjectRef("/srv/worktrees/ITEM-1", "ITEM-1"), []),
+        (ProjectRef("/var/tmp/st-hb/worktrees/ITEM-1", "ITEM-1"), []),
         (ProjectRef("/srv/other", "other"), []),
     ]
     labels = unique_labels(pairs)
 
     assert len(set(labels)) == len(labels)
     assert labels[2] == "other"
-    assert all("STW-1" in label for label in labels[:2])
+    assert all("ITEM-1" in label for label in labels[:2])
     assert labels[0] != labels[1]

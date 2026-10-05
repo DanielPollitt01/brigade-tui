@@ -243,7 +243,7 @@ def main() -> int:
         ),
         "failures": failures,
     }
-    (EVIDENCE / "STW-40-verify-grid.json").write_text(
+    (EVIDENCE / "ITEM-40-verify-grid.json").write_text(
         json.dumps(report, indent=2), encoding="utf-8"
     )
 

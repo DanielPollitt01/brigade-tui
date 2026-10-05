@@ -33,11 +33,11 @@ class SessionSource(Protocol):
 def resolve_repo_root(directory: str) -> str:
     """Return the git checkout a worktree belongs to, else ``directory``.
 
-    A Steward worktree is a git worktree: its root holds a ``.git`` file whose
-    ``gitdir`` points at ``<owner>/.git/worktrees/<name>``. Such a session
-    folds onto the owner, so one project owns one tab. A normal checkout (a
-    ``.git`` directory) and a directory with no git marker are returned
-    unchanged, so distinct projects stay distinct.
+    A git worktree's root holds a ``.git`` file whose ``gitdir`` points at
+    ``<owner>/.git/worktrees/<name>``. Such a session folds onto the owner, so
+    one project owns one tab. A normal checkout (a ``.git`` directory) and a
+    directory with no git marker are returned unchanged, so distinct projects
+    stay distinct.
     """
     if not directory:
         return directory
@@ -85,8 +85,8 @@ def project_from_directory(directory: str) -> ProjectRef:
     """Turn a working directory into a project key and short label.
 
     The key is the owning git checkout when the directory is a git worktree,
-    so every Steward worktree folds into the project it belongs to. The label
-    stays the directory's base name.
+    so every worktree folds into the project it belongs to. The label stays
+    the directory's base name.
     """
     if not directory or directory == "/":
         return ProjectRef(key=directory or "/", label="/")

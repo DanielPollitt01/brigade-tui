@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-46: the source health strip with path, open mode and count.
+"""Prove the source health strip with path, open mode and count.
 
 Read-only. It never writes to a source store.
 
@@ -111,7 +111,7 @@ def main() -> int:
             failures.append("the strip renders a missing store as a zero count")
 
         document = {
-            "criterion": "STW-46 source health strip with path, open mode and count",
+            "criterion": "ITEM-46 source health strip with path, open mode and count",
             "real_stores": [
                 {
                     "harness": item.harness,
@@ -135,7 +135,7 @@ def main() -> int:
             "failures": failures,
         }
         EVIDENCE.mkdir(exist_ok=True)
-        out = EVIDENCE / "STW-46-source-health.json"
+        out = EVIDENCE / "ITEM-46-source-health.json"
         out.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
     finally:
         if saved is None:

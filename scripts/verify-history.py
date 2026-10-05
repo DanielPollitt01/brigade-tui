@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-25: previous sessions stay reachable through the live view.
+"""Prove previous sessions stay reachable through the live view.
 
 The live dashboard caps the tab bar to the 10 newest projects and each tab to
 the newest 50 rows. This script drives the real ``BrigadeTUI`` over the

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-45: elapsed time is the real run span, and the state splits.
+"""Prove elapsed time is the real run span, and the state splits.
 
 The script points Brigade at the real stores on this machine and builds the
 grid cards the way the TUI does. It proves:
@@ -140,7 +140,7 @@ def main() -> int:
         "failures": failures,
     }
     EVIDENCE.mkdir(exist_ok=True)
-    (EVIDENCE / "STW-45-verify-elapsed.json").write_text(
+    (EVIDENCE / "ITEM-45-verify-elapsed.json").write_text(
         json.dumps(report, indent=2), encoding="utf-8"
     )
 

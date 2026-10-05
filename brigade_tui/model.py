@@ -28,7 +28,7 @@ def detect_role(*values: object) -> str | None:
     """Return a known role named in any value, else None.
 
     A role matches only as a whole word, so ``builder`` in a path does not
-    fake a role but ``stw-31-builder`` does.
+    fake a role but ``item-31-builder`` does.
     """
     for value in values:
         if not value:
@@ -40,22 +40,21 @@ def detect_role(*values: object) -> str | None:
     return None
 
 
-#: Roots whose sessions are seed or scratch debris, not real projects. The
-#: Steward seed and its worktree harness set the working directory to a
-#: throwaway temp dir, so the session's cwd is the marker. Brigade hides by
-#: that marker, never by guessing from a title or a name.
+#: Roots whose sessions are seed or scratch debris, not real projects. A
+#: seed or scratch run sets the working directory to a throwaway temp dir,
+#: so the session's cwd is the marker. Brigade hides by that marker, never by
+#: guessing from a title or a name.
 SCRATCH_ROOTS: tuple[str, ...] = ("/tmp", "/var/tmp", "/private/tmp")
 
 #: Session id, project key or directory prefixes that mark a seed or scratch
-#: run even outside a temp root. The Steward seed can use these to mark one.
+#: run even outside a temp root. A harness can use these to mark one.
 SCRATCH_PREFIXES: tuple[str, ...] = ("seed-", "scratch-")
 
-#: The Steward worktree layout: a path under ``.../worktrees/STW-<n>``. A
-#: real git worktree folds to its owning project (see
-#: ``sources.base.resolve_repo_root``), so its project key is the owner. One
-#: that does not fold has no owner: it is Steward debris, not a project, and
-#: owns no tab.
-WORKTREE_KEY_RE = re.compile(r"/worktrees/STW-\d+(/|$)")
+#: A path under a git worktrees directory. A real git worktree folds to its
+#: owning project (see ``sources.base.resolve_repo_root``), so its project key
+#: is the owner. One that does not fold has no owner: it is debris, not a
+#: project, and owns no tab.
+WORKTREE_KEY_RE = re.compile(r"/worktrees/[^/]+(/|$)")
 
 
 def _is_under(location: str, root: str) -> bool:
@@ -70,13 +69,13 @@ def _is_under(location: str, root: str) -> bool:
 def is_scratch(session: "Session") -> bool:
     """True when a session is seed or scratch debris, not a real project.
 
-    The Steward seed sets the working directory to a throwaway temp dir. A
-    session whose cwd, directory or project key sits under a temp root is that
-    debris. A session id or project key that starts with a seed prefix is
-    hidden too, so the seed can mark one even outside a temp dir.
+    A seed or scratch run sets the working directory to a throwaway temp dir.
+    A session whose cwd, directory or project key sits under a temp root is
+    that debris. A session id or project key that starts with a seed prefix is
+    hidden too, so a run can mark one even outside a temp dir.
 
-    A Steward worktree that did not fold onto an owner keeps the worktree
-    path as its project key. It is debris too, so it owns no tab.
+    A worktree that did not fold onto an owner keeps the worktree path as its
+    project key. It is debris too, so it owns no tab.
     """
     location = session.directory or session.project.key
     roots = (*SCRATCH_ROOTS, tempfile.gettempdir())

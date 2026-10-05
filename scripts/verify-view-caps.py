@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-50: the view states the tab cap and the row cap.
+"""Prove the view states the tab cap and the row cap.
 
 Reads the real pi, Claude Code and opencode stores once, then drives the real
 ``BrigadeTUI`` and reads the rendered ``#view-caps`` line. The line
@@ -154,7 +154,7 @@ def main() -> int:
         "failures": failures,
     }
     EVIDENCE.mkdir(exist_ok=True)
-    out = EVIDENCE / "STW-50-view-caps.json"
+    out = EVIDENCE / "ITEM-50-view-caps.json"
     out.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(json.dumps(report, indent=2))
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove STW-53: pi and Claude transcripts carry real token and cost totals.
+"""Prove pi and Claude transcripts carry real token and cost totals.
 
 Read-only. It never writes to a source store.
 
@@ -219,7 +219,7 @@ def main() -> int:
     tokens_non_blank = sum(1 for row in matrix if row.get("tokens_non_blank"))
     cost_non_blank = sum(1 for row in matrix if row.get("cost_non_blank"))
     document = {
-        "criterion": "STW-53 usage totals from pi and Claude transcripts",
+        "criterion": "ITEM-53 usage totals from pi and Claude transcripts",
         "stores": {
             "pi": str(pi.root),
             "claude": str(claude.root),
@@ -230,7 +230,7 @@ def main() -> int:
         "tokens_non_blank_harnesses": tokens_non_blank,
         "cost_non_blank_harnesses": cost_non_blank,
     }
-    out = Path(__file__).resolve().parents[1] / "evidence" / "STW-53-verify-usage.json"
+    out = Path(__file__).resolve().parents[1] / "evidence" / "ITEM-53-verify-usage.json"
     out.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
     for result in results:
         print(

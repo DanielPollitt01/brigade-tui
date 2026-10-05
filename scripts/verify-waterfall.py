@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prove the STW-38 block timeline against the real stores.
+"""Prove the ITEM-38 block timeline against the real stores.
 
 Two parts:
 
@@ -193,7 +193,7 @@ def main() -> int:
     parser.add_argument("--skip-live", action="store_true")
     args = parser.parse_args()
 
-    lines: list[str] = [f"STW-49 waterfall window evidence: {args.out}", ""]
+    lines: list[str] = [f"ITEM-49 waterfall window evidence: {args.out}", ""]
     unit_ok, unit_lines = check_1200s_timeline()
     lines.extend(unit_lines)
     lines.append("")

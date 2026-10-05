@@ -62,7 +62,7 @@ def main() -> int:
         failures.append(f"state colours in the waterfall: {found_colours}")
 
     EVIDENCE.mkdir(exist_ok=True)
-    (EVIDENCE / "STW-40-verify-waterfall-no-state.json").write_text(
+    (EVIDENCE / "ITEM-40-verify-waterfall-no-state.json").write_text(
         json.dumps({**report, "failures": failures}, indent=2), encoding="utf-8"
     )
 
