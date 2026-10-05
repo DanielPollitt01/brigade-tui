@@ -1,0 +1,18 @@
+# Build outputs
+dist/
+build/
+*.egg-info/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environments
+.venv/
+venv/
+
+# Steward live session log. Runtime data; the contract is steward.md.
+sessions.jsonl
+
+# OS / editor
+.DS_Store
+.idea/
